@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-carv <jde-carv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: devjorginho <devjorginho@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:31:04 by jde-carv          #+#    #+#             */
-/*   Updated: 2025/05/03 18:45:08 by jde-carv         ###   ########.fr       */
+/*   Updated: 2025/05/04 02:27:11 by devjorginho      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-int	hasnewline(char *saved)
+int	has_new_line(char *saved)
 {
 	if (!saved)
 		return (0);
@@ -40,7 +40,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*result;
 	char	*start;
 
-	if (!s1 || !s2)
+	if (!s1)
+		s1 = "";
+	if (!s2)
 		return (NULL);
 	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!result)
@@ -54,26 +56,55 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-char	*readandsave(int fd, char *saved)
+char	*pull_line(char *saved)
 {
-	char	*buffer;
-	int		readbytes;
+	char	*line;
+	size_t	i;
 
-	buffer = malloc(BUFFER_SIZE + 1 * sizeof(char));
-	if (!buffer)
+	if (!saved || !*saved)
 		return (NULL);
-	readbytes = 1;
-	while (!has_newline(saved) && readbytes > 0)
+	i = 0;
+	while (saved[i] && saved[i] != '\n')
+		i++;
+	line = malloc(i + 1);
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (saved[i] && saved[i] != '\n')
 	{
-		if (!readbytes)
-		{
-			free (buffer);
-			free (saved);
-			return (NULL);
-		}
-		buffer[readbytes] = '\0';
-		saved = ft_strjoin(saved, buffer);
+		line[i] = saved[i];
+		i++;
 	}
-	free (buffer);
-	return (saved);
+	if (saved[i] == '\n')
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+char	*update_saved(char *saved)
+{
+	int		i;
+	int		j;
+	char	*new_saved;
+
+	i = 0;
+	j = 0;
+	while (saved[i] && saved[i] != '\n')
+		i++;
+	if (!saved[i])
+	{
+		free (saved);
+		return (NULL);
+	}
+	new_saved = malloc(ft_strlen(saved) - i);
+	if (!new_saved)
+		return (NULL);
+	i++;
+	while (saved[i])
+		new_saved[j++] = saved[i++];
+	new_saved[j] = '\0';
+	free (saved);
+	return (new_saved);
 }
