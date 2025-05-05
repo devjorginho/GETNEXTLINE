@@ -6,7 +6,7 @@
 /*   By: jde-carv <jde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 21:16:53 by jde-carv          #+#    #+#             */
-/*   Updated: 2025/05/05 23:14:17 by jde-carv         ###   ########.fr       */
+/*   Updated: 2025/05/05 23:47:31 by jde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	move_and_finish(char *buffer)
 	buffer[j] = '\0';
 }
 
-char	*copy_to_line(char	*line, char *buffer)
+char	*copy_to_line(char *line, char *buffer)
 {
 	char	*newline;
 	char	*ptr;
@@ -60,7 +60,7 @@ char	*copy_to_line(char	*line, char *buffer)
 		if (*buffer++ == '\n')
 			break ;
 	}
-	free (to_free);
+	free(to_free);
 	*ptr = '\0';
 	return (newline);
 }

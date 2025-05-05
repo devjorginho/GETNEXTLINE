@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jde-carv <jde-carv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 21:16:51 by jde-carv          #+#    #+#             */
-/*   Updated: 2025/05/06 00:31:24 by jde-carv         ###   ########.fr       */
+/*   Created: 2025/05/06 00:31:12 by jde-carv          #+#    #+#             */
+/*   Updated: 2025/05/06 00:33:08 by jde-carv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*line;
 	int			readbytes;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FOPEN_MAX)
 		return (NULL);
 	line = NULL;
 	readbytes = 1;
@@ -38,11 +38,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
-// int main()
-//{
-//	int fd = open("test.txt", O_RDONLY);
-//	char *str = get_next_line(fd);
-//	printf ("%s", str);
-//	free(str);
-//}
