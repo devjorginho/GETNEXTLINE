@@ -76,13 +76,6 @@ int main(void)
 
 ---
 
-## 🧪 Bonus
-
-The function should also be able to:
-
-- Handle **multiple file descriptors** at the same time.
-- Avoid memory leaks and unnecessary copies.
-
 ---
 
 ## 📦 Notes
