@@ -76,9 +76,9 @@ int main(void)
 
 ---
 
-## 🧪 Bonus (if applicable)
+## 🧪 Bonus
 
-If you're doing the bonus part, your function should also be able to:
+The function should also be able to:
 
 - Handle **multiple file descriptors** at the same time.
 - Avoid memory leaks and unnecessary copies.
